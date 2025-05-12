@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Community Emergency Preparedness & Response Training</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #eef1f5;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .card-box {
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        .bg-blue { background-color: #259fcf; }
+        .bg-green { background-color: #64af3d; }
+        .bg-red { background-color: #a40808; }
+        .bg-yellow { background-color: #c6cb3b; color: #333; }
+        .filter-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            width:100%;
+        }
+        .form-select, .form-control {
+            border-radius: 8px;
+        }
+        .search-btn {
+            background-color: #64af3d;
+            color: white;
+            font-weight: bold;
+        }
+        .icon-circle {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 4px solid #dee2e6;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #0d6efd;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding-top: 40px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+   .card-container {
+  position: relative;
+  width: 280px;
+  margin: 20px;
+}
+
+.icon-circle {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 4px solid #007bff; /* match card color */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.icon-circle i {
+  font-size: 24px;
+  color: #007bff;
+}
+
+.card {
+      color: white;
+      border-radius: 8px;
+      padding: 50px 20px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+      height: 150px; /* fixed height */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .child-card {
+      color: white;
+      border-radius: 8px;
+      padding: 50px 20px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+      height: 100px; /* fixed height */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+.card-content h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.card-content p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+         .top-card,
+    .bottom-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+     .card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+         .blue        { background-color: #0871A9; }     /* Your custom blue */
+    .blue-border { border-color: #0871A9; color: #0871A9; }
+
+    .green        { background-color: #4CAF50; }
+    .green-border { border-color: #4CAF50; color: #4CAF50; }
+
+    .red        { background-color: #D32F2F; }
+    .red-border { border-color: #D32F2F; color: #D32F2F; }
+
+    .olive        { background-color: #808000; }
+    .olive-border { border-color: #808000; color: #808000; }
+
+         .header {
+        flex-direction: column;
+        align-items: flex-start;
+        width:100%;
+      }
+
+     .actions {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+       margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.actions .btn {
+  flex: 1;
+  min-width: 200px;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+   margin-top: 30px;
+}
+
+.btn-mobilize {
+  background: linear-gradient(45deg, #808000, #80A300);
+}
+
+.btn-add {
+  background: linear-gradient(45deg, #2196F3, #21CBF3);
+}
+
+.btn-pdf {
+  background: linear-gradient(45deg, #E53935, #EF5350);
+}
+
+.btn-excel {
+  background: linear-gradient(45deg, #43A047, #66BB6A);
+}
+
+.actions .btn:hover {
+  filter: brightness(0.9);
+}
+
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1FA5F4;">
+
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-3">-->
+    <div class="container-fluid">
+        <!-- Organization Logo -->
+        <a class="navbar-brand" href="/">
+            <img src="/images/logo.png" alt="Logo" style="height: 40px;">
+        </a>
+        <div class="container-fluid d-flex align-items-center" style="height: 40px;">
+            <h4 class="text-center text-white fw-bold">Community Emergency Preparedness & Response Training</h4>
+        </div>
+
+<!--        <h3 class="text-center  text-white mb-4 fw-bold">Community Emergency Preparedness & Response Training</h3>-->
+
+        <!-- Right Side: Username and Logout -->
+        <div class="d-flex align-items-center ms-auto">
+            <span class="nav-link text-white">
+                Welcome, <strong th:text="${session.loggedInUser.username}">User</strong>
+            </span>
+            <a href="/logout" class="btn btn-outline-danger btn-sm">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+<!--    <h1 class="text-center mb-4 fw-bold">Community Emergency Preparedness & Response Training</h1>-->
+
+
+    <div class="bottom-cards">
+        <div class="card-container">
+            <div class="icon-circle green-border">
+                <i class="fas fa-poll"></i>
+            </div>
+            <div class="card green">
+                <h3>CERTs DEPLOYED</h3>
+                <h2 class="card-text" th:text="${cert}">613,342</h2>
+<!--                <h2 class="card-text">973</h2>-->
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="icon-circle red-border">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="card red">
+                <h3>RESCUE SCOUTS</h3>
+                <h2 class="card-text" th:text="${rescue_scout}">613,342</h2>
+<!--                <h2 class="card-text">11,676</h2>-->
+            </div>
+        </div>
+    </div>
+    <div class="top-card">
+        <div class="card-container">
+            <div class="icon-circle blue-border">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="card blue">
+                <h3>TRAINED VOLUNTEERS</h3>
+                <h2 class="card-text" th:text="${trained}">613,342</h2>
+<!--                <h2 class="card-text">70,008</h2>-->
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="bottom-cards">
+        <div class="card-container">
+            <div class="icon-circle red-border">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="child-card red">
+                <h6>RELIGIOUS INSTITUTES</h6>
+                <h4 class="card-text" th:text="${religious}">613,342</h4>
+<!--                <h4 class="card-text">373</h4>-->
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="icon-circle green-border">
+                <i class="fas fa-poll"></i>
+            </div>
+            <div class="child-card green">
+                <h6>EDUCATIONAL INSTITUTES</h6>
+                <h4 class="card-text" th:text="${education}">613,342</h4>
+<!--                <h4 class="card-text">247</h4>-->
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="icon-circle olive-border">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="child-card olive">
+                <h6>OTHERS</h6>
+                <h4 class="card-text" th:text="${other}">613,342</h4>
+<!--                <h4 class="card-text">281</h4>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-box">
+    <form method="get" action="/dashboard">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label>Start Date</label>
+                <input type="date" class="form-control" name="startDate" th:value="${startDate}">
+            </div>
+            <div class="col-md-3">
+                <label>End Date</label>
+                <input type="date" class="form-control" name="endDate" th:value="${endDate}">
+            </div>
+
+
+<!--            <div class="col-md-3">-->
+<!--                <label>District</label>-->
+<!--                <select class="form-select" name="district">-->
+<!--                    <option value="" th:selected="${param.district == null}">All Districts</option>-->
+<!--                    <option th:each="d : ${districts}"-->
+<!--                            th:value="${d.id}"-->
+<!--                            th:text="${d.name}"-->
+<!--                            th:selected="${param.district == d.id}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
+
+
+
+
+            <!--            <div class="col-md-3">-->
+<!--                <label>District</label>-->
+<!--                <select class="form-select" name="district">-->
+<!--                    <option value="" th:selected="${param.district == null}">All Districts</option>-->
+<!--&lt;!&ndash;                    <option value="" th:selected="${param.district == null or param.district == ''}">All Districts</option>&ndash;&gt;-->
+<!--                    <th:block th:each="d : ${districts}">-->
+<!--                        <option th:value="${d.id}"-->
+<!--                                th:text="${d.name}"-->
+<!--                                th:selected="${param.district} == ${d.id}"></option>-->
+<!--                    </th:block>-->
+<!--                </select>-->
+<!--            </div>-->
+
+
+                        <div class="col-md-3">
+                <label>District</label>
+                <select class="form-select" name="district">
+                    <option value="">Select District</option>
+                    <th:block th:each="d : ${districts}">
+                        <option th:value="${d.id}" th:text="${d.name}"></option>
+           </th:block>
+                </select>
+            </div>
+
+            <div class="col-md-1 d-flex align-items-end">
+                <button type="submit" class="btn search-btn w-100">Filter</button>
+            </div>
+        </div>
+    </form>
+    </div>
+        <div class="header">
+            <div class="actions">
+                <a href="/admin" class="btn btn-mobilize"><i class="fas fa-plus"></i> Add Mobilized CERTs</a>
+                <a href="/admin" class="btn btn-add"><i class="fas fa-plus"></i> Add CEP & RT Report</a>
+                <a href="/export/pdf" class="btn btn-pdf"><i class="fas fa-file-pdf"></i> Export to PDF</a>
+                <a href="/export/excel" class="btn btn-excel"><i class="fas fa-file-excel"></i> Export to Excel</a>
+            </div>
+
+    <div th:if="${isFiltered}">
+    <h5 class="mt-4">Filtered Training Data</h5>
+    <table class="table table-bordered table-striped mt-2">
+        <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>District</th>
+            <th>Trained Volunteer</th>
+            <th>Educational Institutes</th>
+            <th>Religious Institutes</th>
+            <th>Others</th>
+            <th>No. of CERTs Deployed</th>
+            <th>No. of Rescue Scouts</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${data}">
+            <td th:text="${item.date}">Date</td>
+            <td th:text="${item.district.name}">District</td>
+            <td th:text="${item.trained}">0</td>
+            <td th:text="${item.education}">0</td>
+            <td th:text="${item.religious}">0</td>
+            <td th:text="${item.other}">0</td>
+            <td th:text="${item.cert}">0</td>
+            <td th:text="${item.rescue_scouts}">0</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
